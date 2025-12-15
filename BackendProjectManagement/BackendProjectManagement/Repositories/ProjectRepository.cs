@@ -1,6 +1,8 @@
 ﻿namespace BackendProjectManagement.Repositories
 {
-    public class ProjectRepository
+    public class ProjectRepository :IProjectRepository
     {
+
+
     }
 }
