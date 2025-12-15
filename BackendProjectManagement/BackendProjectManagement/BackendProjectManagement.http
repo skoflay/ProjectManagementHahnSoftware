@@ -1,6 +1,6 @@
 @BackendProjectManagement_HostAddress = http://localhost:5182
 
-GET {{BackendProjectManagement_HostAddress}}/weatherforecast/
+GET {{BackendProjectManagement_HostAddress}}/Projects/
 Accept: application/json
 
 ###
