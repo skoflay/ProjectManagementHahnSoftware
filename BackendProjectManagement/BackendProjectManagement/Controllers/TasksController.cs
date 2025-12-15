@@ -24,9 +24,22 @@ namespace BackendProjectManagement.Controllers
 
             var result = TaskMapper.ToDtoList(tasks);
 
+
             return Ok(result);
         }
-        
+
+        [HttpPatch]
+        public async Task<IActionResult> MarkAsCompleted(
+        Guid projectId,
+        Guid taskId)
+        {
+            var success = await _taskService.MarkAsCompletedAsync(taskId);
+
+            if (!success)
+                return NotFound("Task not found");
+
+            return NoContent();
+        }
 
 
 
