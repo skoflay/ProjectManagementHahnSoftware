@@ -1,4 +1,6 @@
-﻿using BackendProjectManagement.Services;
+﻿using BackendProjectManagement.DTOs;
+using BackendProjectManagement.Mapper;
+using BackendProjectManagement.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +17,16 @@ namespace BackendProjectManagement.Controllers
             _taskService = taskService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetTasksByProject(Guid projectId)
+        {
+            var tasks = await _taskService.GetByProjectAsync(projectId);
 
+            var result = TaskMapper.ToDtoList(tasks);
+
+            return Ok(result);
+        }
+        
 
 
 
