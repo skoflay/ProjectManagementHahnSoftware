@@ -1,0 +1,11 @@
+﻿namespace BackendProjectManagement.DTOs
+{
+    public class TaskDto
+    {
+        
+        public string Title { get; set; } = null!;
+        public string? Description { get; set; }
+        public DateTime? DueDate { get; set; }
+        public bool IsCompleted { get; set; }
+    }
+}
