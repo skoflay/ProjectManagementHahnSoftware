@@ -6,7 +6,7 @@ namespace BackendProjectManagement.Services
     {
         Task<TaskItem> CreateAsync(TaskItem task);
         Task<List<TaskItem>> GetByProjectAsync(int projectId);
-        Task<bool> MarkAsCompletedAsync(int taskId);
+        Task<bool> MarkAsCompletedAsync(Guid taskId);
         Task<bool> DeleteAsync(int taskId);
     }
 

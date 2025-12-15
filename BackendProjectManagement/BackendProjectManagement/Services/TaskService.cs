@@ -24,6 +24,18 @@ namespace BackendProjectManagement.Services
             return await _taskRepository.GetByProjectIdAsync(projectId);
         }
 
+        public async Task<bool> MarkAsCompletedAsync(Guid taskId)
+        {
+            var task = await _taskRepository.GetByIdAsync(taskId);
+            if (task == null) return false;
+
+            task.IsCompleted = true;
+            await _taskRepository.UpdateAsync(task);
+            return true;
+        }
+
+
+
 
     }
 }
