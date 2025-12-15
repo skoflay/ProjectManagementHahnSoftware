@@ -18,5 +18,12 @@ namespace BackendProjectManagement.Services
             await _taskRepository.AddAsync(task);
             return task;
         }
+
+        public async Task<List<TaskItem>> GetByProjectAsync(int projectId)
+        {
+            return await _taskRepository.GetByProjectIdAsync(projectId);
+        }
+
+
     }
 }
