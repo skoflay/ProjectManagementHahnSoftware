@@ -22,9 +22,10 @@ namespace BackendProjectManagement.Controllers
         {
             var tasks = await _taskService.GetByProjectAsync(projectId);
 
+            if(tasks == null || !tasks.Any())
+                return NotFound("No tasks found for the specified project");
+
             var result = TaskMapper.ToDtoList(tasks);
-
-
             return Ok(result);
         }
 
