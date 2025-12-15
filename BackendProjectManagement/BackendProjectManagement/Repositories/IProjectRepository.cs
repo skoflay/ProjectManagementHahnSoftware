@@ -8,6 +8,8 @@ namespace BackendProjectManagement.Repositories
         Task<List<Project>> GetAllAsync();
         Task<bool> UpdateAsync(Project project);
         Task<bool> DeleteAsync(Guid id);
+        Task<Project?> GetByIdAsync(Guid id);
+
     }
 
 }
