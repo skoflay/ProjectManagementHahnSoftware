@@ -485,3 +485,8 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 
+.config/
+**/Migrations/*.Designer.cs
+**/Migrations/*.resx
+**/Migrations/*ModelSnapshot.cs
+appsettings.*.json
