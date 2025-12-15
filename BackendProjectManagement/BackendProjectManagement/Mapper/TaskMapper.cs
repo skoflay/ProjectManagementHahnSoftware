@@ -19,5 +19,21 @@ namespace BackendProjectManagement.Mapper
         }
 
 
+        public static TaskDto ToDto(TaskItem entity)
+        {
+            return new TaskDto
+            {
+                
+                Title = entity.Title,
+                Description = entity.Description,
+                DueDate = entity.DueDate,
+                IsCompleted = entity.IsCompleted
+            };
+        }
+
+
+
+
+
     }
 }
