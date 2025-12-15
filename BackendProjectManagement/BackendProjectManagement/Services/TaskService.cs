@@ -19,7 +19,7 @@ namespace BackendProjectManagement.Services
             return task;
         }
 
-        public async Task<List<TaskItem>> GetByProjectAsync(int projectId)
+        public async Task<List<TaskItem>> GetByProjectAsync(Guid projectId)
         {
             return await _taskRepository.GetByProjectIdAsync(projectId);
         }
@@ -34,7 +34,14 @@ namespace BackendProjectManagement.Services
             return true;
         }
 
+        public async Task<bool> DeleteAsync(Guid taskId)
+        {
+            var task = await _taskRepository.GetByIdAsync(taskId);
+            if (task == null) return false;
 
+            await _taskRepository.DeleteAsync(task);
+            return true;
+        }
 
 
     }
