@@ -33,6 +33,15 @@ namespace BackendProjectManagement.Controllers
             return CreatedAtAction(nameof(GetProjectById), new { id = created.Id }, created);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProjectById(Guid id)
+        {
+            var project = await _projectService.GetByIdAsync(id);
+            if (project == null)
+                return NotFound();
+            return Ok(project);
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> GetProjects()
