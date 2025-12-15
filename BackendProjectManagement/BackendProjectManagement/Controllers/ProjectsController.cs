@@ -1,4 +1,5 @@
 ﻿using BackendProjectManagement.DTOs;
+using BackendProjectManagement.Mapper;
 using BackendProjectManagement.Models;
 using BackendProjectManagement.Services;
 using Microsoft.AspNetCore.Http;
@@ -24,11 +25,7 @@ namespace BackendProjectManagement.Controllers
             if (string.IsNullOrWhiteSpace(dto.Title))
                 return BadRequest("Title is required");
 
-            var project = new Project
-            {
-                Title = dto.Title,
-                Description = dto.Description
-            };
+            var project = ProjectMapper.ToEntity(dto);  
 
             var created = await _projectService.CreateAsync(project);
             return CreatedAtAction(nameof(GetProjectById), new { id = created.Id }, created);
@@ -58,8 +55,7 @@ namespace BackendProjectManagement.Controllers
             if (project == null)
                 return NotFound();
 
-            project.Title = dto.Title;
-            project.Description = dto.Description;
+            ProjectMapper.UpdateEntity(project, dto); 
 
             await _projectService.UpdateAsync(project);
             return NoContent();
