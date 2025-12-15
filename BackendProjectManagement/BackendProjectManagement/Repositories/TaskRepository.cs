@@ -26,6 +26,12 @@ namespace BackendProjectManagement.Repositories
                 .ToListAsync();
         }
 
+        public async Task AddAsync(TaskItem task)
+        {
+            _context.Tasks.Add(task);
+            await _context.SaveChangesAsync();
+        }
+
 
 
 
