@@ -31,7 +31,10 @@ namespace BackendProjectManagement.Mapper
             };
         }
 
-
+        public static List<TaskDto> ToDtoList(IEnumerable<TaskItem> tasks)
+        {
+            return tasks.Select(ToDto).ToList();
+        }
 
 
 
