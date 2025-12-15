@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BackendProjectManagement.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/projects/{projectId:guid}/tasks")]
     [ApiController]
     public class TasksController : ControllerBase
     {
@@ -29,7 +29,7 @@ namespace BackendProjectManagement.Controllers
             return Ok(result);
         }
 
-        [HttpPatch]
+        [HttpPatch("{taskId:guid}/complete")]
         public async Task<IActionResult> MarkAsCompleted(
         Guid projectId,
         Guid taskId)
@@ -42,7 +42,7 @@ namespace BackendProjectManagement.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete("{taskId:guid}")]
         public async Task<IActionResult> DeleteTask(Guid projectId,Guid taskId)
         {
             var success = await _taskService.DeleteAsync(taskId);
@@ -53,6 +53,24 @@ namespace BackendProjectManagement.Controllers
             return NoContent();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateTask(
+    Guid projectId,
+    [FromBody] CreateTaskDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var taskEntity = TaskMapper.ToEntity(dto);
+
+            var createdTask = await _taskService.CreateAsync(taskEntity);
+
+            var result = TaskMapper.ToDto(createdTask);
+
+            return CreatedAtAction(
+                nameof(GetTasksByProject),
+                new { projectId = projectId },
+                result);
+        }
 
 
     }
