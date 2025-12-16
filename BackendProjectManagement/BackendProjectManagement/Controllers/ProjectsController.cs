@@ -61,6 +61,16 @@ namespace BackendProjectManagement.Controllers
             return NoContent();
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> DeleteProject(Guid projectId)
+        {
+            var success = await _projectService.DeleteAsync(projectId);
+
+            if (!success)
+                return NotFound("Project not found");
+
+            return NoContent();
+        }
 
 
 
