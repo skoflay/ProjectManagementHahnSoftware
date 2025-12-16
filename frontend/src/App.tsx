@@ -1,13 +1,15 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProjectsPage from './pages/ProjectsPage';
+import TasksPage from './pages/TasksPage';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/" element={<ProjectsPage />} />
+        <Route path="/projects/:projectId/tasks" element={<TasksPage />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
