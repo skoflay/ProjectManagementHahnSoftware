@@ -6,4 +6,6 @@ export const getProjects = async (): Promise<Project[]> => {
   return response.data;
 };
 
-
+export const createProject = async (project: Partial<Project>) => {
+  return apiClient.post('/Projects', project);
+};
