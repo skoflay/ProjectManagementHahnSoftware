@@ -36,12 +36,15 @@ const TasksPage = () => {
       {!loading && !error && tasks.length === 0 && <p>No tasks found</p>}
 
       <ul className="list-group">
-        {tasks.map(task => (
-          <li key={task.id} className="list-group-item d-flex justify-content-between align-items-center">
-            <span>{task.title}</span>
-            {task.isCompleted && <span className="badge bg-success">Done</span>}
-          </li>
-        ))}
+        {tasks.map(task => {
+        console.log('TASK:', task);
+        return (
+            <li key={task.id}>
+            {task.title}
+            </li>
+        );
+        })}
+
       </ul>
     </div>
   );
