@@ -9,3 +9,8 @@ export const getProjects = async (): Promise<Project[]> => {
 export const createProject = async (project: Partial<Project>) => {
   return apiClient.post('/Projects', project);
 };
+
+
+export const updateProject = async (project: Partial<Project>) => {
+  return apiClient.put('/Projects', project);
+};
