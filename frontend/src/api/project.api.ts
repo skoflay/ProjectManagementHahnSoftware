@@ -14,3 +14,7 @@ export const createProject = async (project: Partial<Project>) => {
 export const updateProject = async (project: Partial<Project>) => {
   return apiClient.put('/Projects', project);
 };
+
+export const DeleteProject = async () => {
+  return apiClient.delete('/Projects',);
+};
