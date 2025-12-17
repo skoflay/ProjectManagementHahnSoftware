@@ -4,6 +4,7 @@ import { ProjectService } from '../services/project.service';
 import { useNavigate } from 'react-router-dom';
 import { ProjectForm } from '../components/ProjectForm';
 import { ProjectUpdateForm } from '../components/ProjectUpdateForm';
+import { ProjectProgressBar } from '../components/ProjectProgressBar';
 
 export const ProjectsPage = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -79,7 +80,7 @@ export const ProjectsPage = () => {
                   <>
                     <h5 className="card-title">{project.title}</h5>
                     <p className="card-text">{project.description || 'No description'}</p>
-
+                     <ProjectProgressBar projectId={project.id} />
                     <button className="btn btn-sm btn-primary me-2" onClick={() => setEditingProjectId(project.id)}>✏️</button>
                     <button className="btn btn-sm btn-danger me-2" onClick={() => handleDelete(project.id)}>🗑️</button>
                     <button className="btn btn-sm btn-info" onClick={() => handleDetails(project.id)}>📄</button>

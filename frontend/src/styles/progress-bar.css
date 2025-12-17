@@ -1,0 +1,105 @@
+.container {
+  margin-bottom: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.taskCount {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #6c757d);
+}
+
+.status {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Status text colors */
+.status.notstarted {
+  color: var(--status-not-started, #6c757d);
+}
+
+.status.inprogress {
+  color: var(--status-in-progress, #007bff);
+}
+
+.status.completed {
+  color: var(--status-completed, #28a745);
+}
+
+.progress {
+  height: 1.5rem;
+  background-color: var(--progress-bg, #e9ecef);
+  border-radius: 0.375rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressBar {
+  height: 100%;
+  width: var(--progress-width, 0%);
+  background-color: var(--progress-bar-primary, #007bff);
+  border-radius: 0.375rem;
+  transition: width 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-width: 2rem; /* Ensures text is visible even at low percentages */
+}
+
+.progressBar.completed {
+  background-color: var(--progress-bar-success, #28a745);
+}
+
+/* Optional: Add animation for progress changes */
+@keyframes progressPulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
+.progressBar:not(.completed) {
+  animation: progressPulse 2s infinite;
+}
+
+.progressText {
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  padding: 0 0.5rem;
+  white-space: nowrap;
+}
+
+/* Accessibility focus styles */
+.progressBar:focus {
+  outline: 2px solid var(--focus-outline, #0056b3);
+  outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .status {
+    align-self: flex-end;
+  }
+  
+  .progress {
+    height: 1.25rem;
+  }
+  
+  .progressText {
+    font-size: 0.7rem;
+  }
+}
