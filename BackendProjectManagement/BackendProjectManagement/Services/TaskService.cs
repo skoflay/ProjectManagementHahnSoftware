@@ -1,4 +1,5 @@
-﻿using BackendProjectManagement.Models;
+﻿using BackendProjectManagement.DTOs;
+using BackendProjectManagement.Models;
 using BackendProjectManagement.Repositories;
 
 namespace BackendProjectManagement.Services
@@ -56,6 +57,24 @@ namespace BackendProjectManagement.Services
 
             return await _taskRepository.UpdateAsync(existingTask);
         }
+
+
+        public async Task<ProjectProgressDto> GetProgressAsync(Guid projectId)
+        {
+            var tasks = await _taskRepository.GetByProjectIdAsync(projectId);
+
+            var total = tasks.Count;
+            var completed = tasks.Count(t => t.IsCompleted);
+
+            return new ProjectProgressDto
+            {
+                TotalTasks = total,
+                CompletedTasks = completed,
+                ProgressPercentage = total == 0 ? 0 : (completed * 100) / total,
+                IsCompleted = total > 0 && completed == total
+            };
+        }
+
 
 
 
