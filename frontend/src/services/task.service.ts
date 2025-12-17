@@ -13,6 +13,13 @@ export const TaskService = {
     return TaskApi.markAsCompleted(projectId, taskId);
   },
 
+  create: async (
+    projectId: string,
+    data: Task
+  ): Promise<Task> => {
+    return TaskApi.create(projectId, data);
+  },
+
   delete: async (
     projectId: string,
     taskId: string
