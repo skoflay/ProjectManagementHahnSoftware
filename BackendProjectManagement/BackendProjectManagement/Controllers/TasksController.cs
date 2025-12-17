@@ -60,7 +60,11 @@ namespace BackendProjectManagement.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
             var taskEntity = TaskMapper.ToEntity(dto);
+
+            
+            taskEntity.ProjectId = projectId;
 
             var createdTask = await _taskService.CreateAsync(taskEntity);
 
@@ -72,14 +76,15 @@ namespace BackendProjectManagement.Controllers
                 result);
         }
 
+
         [HttpPatch("{taskId:guid}")]
         public async Task<IActionResult> UpdateTask(Guid projectId, Guid taskId, [FromBody] UpdateTaskDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var taskEntity = TaskMapper.ToEntity(dto); 
-
+            var taskEntity = TaskMapper.ToEntity(dto);
+            taskEntity.ProjectId = projectId;
             try
             {
                 var updatedTask = await _taskService.UpdateAsync(taskId, taskEntity);
