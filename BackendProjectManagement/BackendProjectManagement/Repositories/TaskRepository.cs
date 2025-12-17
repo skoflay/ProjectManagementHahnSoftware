@@ -32,10 +32,12 @@ namespace BackendProjectManagement.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(TaskItem task)
+
+        public async Task<TaskItem> UpdateAsync(TaskItem task)
         {
             _context.Tasks.Update(task);
             await _context.SaveChangesAsync();
+            return task;
         }
 
         public async Task DeleteAsync(TaskItem task)

@@ -35,6 +35,16 @@ namespace BackendProjectManagement.Mapper
         {
             return tasks.Select(ToDto).ToList();
         }
+        public static TaskItem ToEntity(UpdateTaskDto dto)
+        {
+            return new TaskItem
+            {
+                Title = dto.Title,
+                Description = dto.Description,
+                DueDate = dto.DueDate ?? DateTime.Now,
+                IsCompleted = dto.IsCompleted ?? false
+            };
+        }
 
 
 

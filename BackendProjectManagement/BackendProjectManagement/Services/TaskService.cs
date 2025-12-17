@@ -43,6 +43,21 @@ namespace BackendProjectManagement.Services
             return true;
         }
 
+        public async Task<TaskItem> UpdateAsync(Guid taskId, TaskItem updatedTask)
+        {
+            var existingTask = await _taskRepository.GetByIdAsync(taskId);
+            if (existingTask == null)
+                throw new KeyNotFoundException("Task not found");
+
+            existingTask.Title = updatedTask.Title;
+            existingTask.Description = updatedTask.Description;
+            existingTask.DueDate = updatedTask.DueDate;
+            existingTask.IsCompleted = updatedTask.IsCompleted;
+
+            return await _taskRepository.UpdateAsync(existingTask);
+        }
+
+
 
     }
 }

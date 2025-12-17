@@ -72,6 +72,26 @@ namespace BackendProjectManagement.Controllers
                 result);
         }
 
+        [HttpPatch("{taskId:guid}")]
+        public async Task<IActionResult> UpdateTask(Guid projectId, Guid taskId, [FromBody] UpdateTaskDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var taskEntity = TaskMapper.ToEntity(dto); 
+
+            try
+            {
+                var updatedTask = await _taskService.UpdateAsync(taskId, taskEntity);
+                var result = TaskMapper.ToDto(updatedTask);
+                return Ok(result);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound("Task not found");
+            }
+        }
+
 
     }
 }
