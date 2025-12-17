@@ -1,4 +1,4 @@
-// src/pages/ProjectsPage.tsx
+
 import { useEffect, useState } from 'react';
 import type { Project } from '../types/project.types';
 import { ProjectService } from '../services/project.service';

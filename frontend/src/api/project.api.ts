@@ -13,5 +13,10 @@ export const ProjectApi = {
   update: async (projectId: string, data: Partial<Project>): Promise<Project> => {
     const response = await apiClient.put<Project>(`/Projects/${projectId}`, data);
     return response.data;
+  },
+
+  create: async (data: Partial<Project>): Promise<Project> => {
+    const response = await apiClient.post<Project>(`/Projects/`, data);
+    return response.data;
   }
 };

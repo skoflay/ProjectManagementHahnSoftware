@@ -11,5 +11,10 @@ export const ProjectService = {
   },
   update: async (projectId: string, data: Partial<Project>): Promise<Project> => {
     return ProjectApi.update(projectId, data);
+  },
+  create: async (data: Partial<Project>): Promise<Project> => {
+    return ProjectApi.create(data);
   }
+
+
 };
