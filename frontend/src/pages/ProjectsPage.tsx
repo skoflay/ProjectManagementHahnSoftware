@@ -1,13 +1,17 @@
-
 import { useEffect, useState } from 'react';
 import type { Project } from '../types/project.types';
 import { ProjectService } from '../services/project.service';
 import { useNavigate } from 'react-router-dom';
+import { ProjectForm } from '../components/ProjectForm';
+import { ProjectUpdateForm } from '../components/ProjectUpdateForm';
 
-const ProjectsPage = () => {
+export const ProjectsPage = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,31 +25,41 @@ const ProjectsPage = () => {
       setProjects(data);
     } catch (err) {
       setError('Failed to load projects');
-      console.log(err);
+      console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
   const handleDelete = async (projectId: string) => {
-    if (!confirm('Are you sure you want to delete this project?')) return;
-    try {
-      await ProjectService.delete(projectId);
-      setProjects(projects.filter(p => p.id !== projectId));
-    } catch (err) {
-      console.error(err);
-      alert('Failed to delete project');
-    }
+    if (!confirm('Are you sure?')) return;
+    await ProjectService.delete(projectId);
+    setProjects(projects.filter(p => p.id !== projectId));
   };
 
-  const handleEdit = (project: Project) => {
-    
-    navigate(`/projects/edit/${project.id}`);
+  const handleDetails = (projectId: string) => {
+    navigate(`/projects/${projectId}/tasks`);
+  };
+
+  const handleCreated = (project: Project) => {
+    setProjects([...projects, project]);
+    setShowCreateForm(false);
+  };
+
+  const handleUpdated = (updated: Project) => {
+    setProjects(projects.map(p => p.id === updated.id ? updated : p));
+    setEditingProjectId(null);
   };
 
   return (
     <div className="container mt-4">
       <h2 className="mb-4">My Projects</h2>
+
+      <button className="btn btn-success mb-3" onClick={() => setShowCreateForm(!showCreateForm)}>
+        {showCreateForm ? 'Cancel' : '➕ Create Project'}
+      </button>
+
+      {showCreateForm && <ProjectForm onCreated={handleCreated} onCancel={() => setShowCreateForm(false)} />}
 
       {loading && <p>Loading...</p>}
       {error && <p className="text-danger">{error}</p>}
@@ -55,20 +69,22 @@ const ProjectsPage = () => {
           <div className="col-md-4 mb-3" key={project.id}>
             <div className="card shadow-sm">
               <div className="card-body">
-                <h5 className="card-title">{project.title}</h5>
-                <p className="card-text">{project.description || 'No description'}</p>
-                <button
-                  className="btn btn-primary me-2"
-                  onClick={() => handleEdit(project)}
-                >
-                  Edit
-                </button>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => handleDelete(project.id)}
-                >
-                  Delete
-                </button>
+                {editingProjectId === project.id ? (
+                  <ProjectUpdateForm
+                    project={project}
+                    onUpdated={handleUpdated}
+                    onCancel={() => setEditingProjectId(null)}
+                  />
+                ) : (
+                  <>
+                    <h5 className="card-title">{project.title}</h5>
+                    <p className="card-text">{project.description || 'No description'}</p>
+
+                    <button className="btn btn-sm btn-primary me-2" onClick={() => setEditingProjectId(project.id)}>✏️</button>
+                    <button className="btn btn-sm btn-danger me-2" onClick={() => handleDelete(project.id)}>🗑️</button>
+                    <button className="btn btn-sm btn-info" onClick={() => handleDetails(project.id)}>📄</button>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -77,5 +93,4 @@ const ProjectsPage = () => {
     </div>
   );
 };
-
-export default ProjectsPage;
+export default ProjectsPage
