@@ -72,6 +72,14 @@ namespace BackendProjectManagement.Controllers
             return NoContent();
         }
 
+        [HttpGet("{projectId:guid}/progress")]
+        public async Task<IActionResult> GetProgress(Guid projectId)
+        {
+            var progress = await _projectService.GetProgressAsync(projectId);
+            return Ok(progress);
+        }
+
+
 
 
 

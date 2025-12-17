@@ -1,4 +1,5 @@
-﻿using BackendProjectManagement.Models;
+﻿using BackendProjectManagement.DTOs;
+using BackendProjectManagement.Models;
 
 namespace BackendProjectManagement.Services
 {
@@ -9,6 +10,7 @@ namespace BackendProjectManagement.Services
         Task<bool> UpdateAsync(Project project);
         Task<bool> DeleteAsync(Guid id);
         Task<Project?> GetByIdAsync(Guid id);
+        Task<ProjectProgressDto> GetProgressAsync(Guid projectId);
 
     }
 }

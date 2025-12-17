@@ -1,54 +1,57 @@
 import { useEffect, useState } from 'react';
-import { TaskService } from '../services/task.service';
-import type { Task } from '../types/task.types';
+import { ProjectService } from '../services/project.service';
+import type {ProjectProgress} from '../types/projectprogress.types'
 
 interface Props {
   projectId: string;
 }
 
 export const ProjectProgressBar = ({ projectId }: Props) => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [progress, setProgress] = useState<ProjectProgress | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadTasks();
+    loadProgress();
   }, [projectId]);
 
-  const loadTasks = async () => {
+  const loadProgress = async () => {
     try {
-      const data = await TaskService.getByProject(projectId);
-      setTasks(data);
+      const data = await ProjectService.getProgress(projectId);
+      setProgress(data);
     } finally {
       setLoading(false);
     }
   };
 
-  if (loading) return null;
+  if (loading || !progress) return null;
 
-  const total = tasks.length;
-  const completed = tasks.filter(t => t.isCompleted).length;
+  const {
+    totalTasks,
+    completedTasks,
+    progressPercentage,
+    isCompleted
+  } = progress;
 
-  const isCompleted = total > 0 && completed === total;
+  const statusLabel =
+    totalTasks === 0
+      ? 'No tasks'
+      : isCompleted
+        ? 'Project completed'
+        : 'In progress';
 
   return (
     <div className="mt-2">
       <div className="d-flex justify-content-between mb-1">
+        <small>{statusLabel}</small>
         <small>
-          {isCompleted
-            ? 'Project completed'
-            : total === 0
-              ? 'No tasks'
-              : 'In progress'}
-        </small>
-        <small>
-          {completed}/{total}
+          {completedTasks}/{totalTasks}
         </small>
       </div>
 
       <progress
         className="w-100"
-        value={completed}
-        max={total === 0 ? 1 : total}
+        value={progressPercentage}
+        max={100}
         aria-label="Project progress"
       />
     </div>

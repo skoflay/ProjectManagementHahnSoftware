@@ -1,6 +1,7 @@
 
 import { apiClient } from './axios';
 import type { Project } from '../types/project.types';
+import type {ProjectProgress} from '../types/projectprogress.types';
 
 export const ProjectApi = {
   getAll: async (): Promise<Project[]> => {
@@ -18,5 +19,12 @@ export const ProjectApi = {
   create: async (data: Partial<Project>): Promise<Project> => {
     const response = await apiClient.post<Project>(`/Projects/`, data);
     return response.data;
+  },
+
+  getProgress: async (projectId: string): Promise<ProjectProgress> => {
+    const res = await apiClient.get<ProjectProgress>(
+      `/projects/${projectId}/progress`
+    );
+    return res.data;
   }
 };

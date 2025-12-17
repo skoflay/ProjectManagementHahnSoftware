@@ -1,6 +1,7 @@
 
 import { ProjectApi } from '../api/project.api';
 import type { Project } from '../types/project.types';
+import type {ProjectProgress} from '../types/projectprogress.types'
 
 export const ProjectService = {
   getAll: async (): Promise<Project[]> => {
@@ -14,6 +15,10 @@ export const ProjectService = {
   },
   create: async (data: Partial<Project>): Promise<Project> => {
     return ProjectApi.create(data);
+  },
+
+   getProgress: async (projectId: string): Promise<ProjectProgress> => {
+    return ProjectApi.getProgress(projectId);
   }
 
 
