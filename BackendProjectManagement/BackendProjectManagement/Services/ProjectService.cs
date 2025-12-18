@@ -61,6 +61,12 @@ namespace BackendProjectManagement.Services
 
         }
 
-
+        public async Task<PagedResultDto<Project>> GetPagedAsync(int page, int pageSize)
+        {
+            return await _repository.GetPagedAsync(page, pageSize);
         }
+
+
+
+    }
 }

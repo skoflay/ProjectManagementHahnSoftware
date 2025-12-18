@@ -1,4 +1,5 @@
 ﻿using BackendProjectManagement.Data;
+using BackendProjectManagement.DTOs;
 using BackendProjectManagement.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -46,6 +47,28 @@ namespace BackendProjectManagement.Repositories
         {
             return await _context.Projects.FindAsync(id);
         }
+
+        public async Task<PagedResultDto<Project>> GetPagedAsync(int page, int pageSize)
+        {
+            var query = _context.Projects.AsQueryable();
+
+            var totalItems = await query.CountAsync();
+
+            var items = await query
+                .OrderByDescending(p => p.CreatedAt) 
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PagedResultDto<Project>
+            {
+                Items = items,
+                Page = page,
+                PageSize = pageSize,
+                TotalItems = totalItems
+            };
+        }
+
 
 
     }

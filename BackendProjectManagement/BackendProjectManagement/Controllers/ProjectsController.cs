@@ -41,12 +41,7 @@ namespace BackendProjectManagement.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<IActionResult> GetProjects()
-        {
-            var projects = await _projectService.GetAllAsync();
-            return Ok(projects);
-        }
+       
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProject(Guid id, [FromBody] UpdateProjectDto dto)
@@ -78,6 +73,23 @@ namespace BackendProjectManagement.Controllers
             var progress = await _projectService.GetProgressAsync(projectId);
             return Ok(progress);
         }
+
+        [HttpGet]
+        public async Task<ActionResult<PagedResultDto<ProjectDto>>> GetProjects(
+    [FromQuery] int page = 1,
+    [FromQuery] int pageSize = 6)
+        {
+            var result = await _projectService.GetPagedAsync(page, pageSize);
+
+            return Ok(new PagedResultDto<ProjectDto>
+            {
+                Items = result.Items.Select(ProjectMapper.ToDto),
+                Page = result.Page,
+                PageSize = result.PageSize,
+                TotalItems = result.TotalItems
+            });
+        }
+
 
 
 

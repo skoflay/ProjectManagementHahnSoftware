@@ -1,3 +1,4 @@
+// src/pages/ProjectsPage.tsx
 import { useEffect, useState } from 'react';
 import type { Project } from '../types/project.types';
 import { ProjectService } from '../services/project.service';
@@ -13,17 +14,24 @@ export const ProjectsPage = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
 
+  // Pagination
+  const [page, setPage] = useState(1);
+  const pageSize = 6;
+  const [totalItems, setTotalItems] = useState(0);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    loadProjects();
-  }, []);
+    loadProjects(page);
+  }, [page]);
 
-  const loadProjects = async () => {
+  const loadProjects = async (pageNumber: number = page) => {
     try {
       setLoading(true);
-      const data = await ProjectService.getAll();
-      setProjects(data);
+      const data = await ProjectService.getPaged(pageNumber, pageSize);
+      setProjects(data.items);
+      setTotalItems(data.totalItems);
+      setPage(data.page);
     } catch (err) {
       setError('Failed to load projects');
       console.error(err);
@@ -43,14 +51,16 @@ export const ProjectsPage = () => {
   };
 
   const handleCreated = (project: Project) => {
-    setProjects([...projects, project]);
+    setProjects([project, ...projects]);
     setShowCreateForm(false);
   };
 
   const handleUpdated = (updated: Project) => {
-    setProjects(projects.map(p => p.id === updated.id ? updated : p));
+    setProjects(projects.map(p => (p.id === updated.id ? updated : p)));
     setEditingProjectId(null);
   };
+
+  const totalPages = Math.ceil(totalItems / pageSize);
 
   return (
     <div className="container mt-4">
@@ -80,7 +90,9 @@ export const ProjectsPage = () => {
                   <>
                     <h5 className="card-title">{project.title}</h5>
                     <p className="card-text">{project.description || 'No description'}</p>
-                     <ProjectProgressBar projectId={project.id} />
+
+                    <ProjectProgressBar projectId={project.id} />
+
                     <button className="btn btn-sm btn-primary me-2" onClick={() => setEditingProjectId(project.id)}>✏️</button>
                     <button className="btn btn-sm btn-danger me-2" onClick={() => handleDelete(project.id)}>🗑️</button>
                     <button className="btn btn-sm btn-info" onClick={() => handleDetails(project.id)}>📄</button>
@@ -91,7 +103,29 @@ export const ProjectsPage = () => {
           </div>
         ))}
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="d-flex justify-content-between mt-3">
+          <button
+            className="btn btn-secondary"
+            disabled={page <= 1}
+            onClick={() => setPage(page - 1)}
+          >
+            Previous
+          </button>
+          <span>Page {page} of {totalPages}</span>
+          <button
+            className="btn btn-secondary"
+            disabled={page >= totalPages}
+            onClick={() => setPage(page + 1)}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };
-export default ProjectsPage
+
+export default ProjectsPage;

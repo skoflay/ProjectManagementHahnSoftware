@@ -11,6 +11,7 @@ namespace BackendProjectManagement.Services
         Task<bool> DeleteAsync(Guid id);
         Task<Project?> GetByIdAsync(Guid id);
         Task<ProjectProgressDto> GetProgressAsync(Guid projectId);
+        Task<PagedResultDto<Project>> GetPagedAsync(int page, int pageSize);
 
     }
 }

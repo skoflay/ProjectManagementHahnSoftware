@@ -2,6 +2,9 @@
 import { apiClient } from './axios';
 import type { Project } from '../types/project.types';
 import type {ProjectProgress} from '../types/projectprogress.types';
+import type { PagedResult } from '../types/PagedResult';
+
+
 
 export const ProjectApi = {
   getAll: async (): Promise<Project[]> => {
@@ -24,6 +27,16 @@ export const ProjectApi = {
   getProgress: async (projectId: string): Promise<ProjectProgress> => {
     const res = await apiClient.get<ProjectProgress>(
       `/projects/${projectId}/progress`
+    );
+    return res.data;
+  },
+
+   getPaged: async (
+    page: number,
+    pageSize: number
+  ): Promise<PagedResult<Project>> => {
+    const res = await apiClient.get<PagedResult<Project>>(
+      `/projects?page=${page}&pageSize=${pageSize}`
     );
     return res.data;
   }

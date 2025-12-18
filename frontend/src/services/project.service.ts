@@ -2,7 +2,7 @@
 import { ProjectApi } from '../api/project.api';
 import type { Project } from '../types/project.types';
 import type {ProjectProgress} from '../types/projectprogress.types'
-
+import type { PagedResult } from '../types/PagedResult';
 export const ProjectService = {
   getAll: async (): Promise<Project[]> => {
     return ProjectApi.getAll();
@@ -19,7 +19,13 @@ export const ProjectService = {
 
    getProgress: async (projectId: string): Promise<ProjectProgress> => {
     return ProjectApi.getProgress(projectId);
+  },
+  
+  getPaged: async (
+    page: number,
+    pageSize: number
+  ): Promise<PagedResult<Project>> => {
+    return ProjectApi.getPaged(page, pageSize);
   }
-
 
 };

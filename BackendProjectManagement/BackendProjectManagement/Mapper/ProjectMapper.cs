@@ -16,7 +16,17 @@ namespace BackendProjectManagement.Mapper
                 CreatedAt = DateTime.UtcNow
             };
         }
-
+        public static ProjectDto ToDto(Project project)
+        {
+            return new ProjectDto
+            {
+                Id = project.Id,
+                Title = project.Title,
+                Description = project.Description,
+                CreatedAt = project.CreatedAt,
+               
+            };
+        }
 
         public static void UpdateEntity(Project project, UpdateProjectDto dto)
         {
@@ -25,7 +35,7 @@ namespace BackendProjectManagement.Mapper
         }
 
 
-        public static CreateProjectDto ToDto(Project project)
+        public static CreateProjectDto CreateToDto(Project project)
         {
             return new CreateProjectDto
             {

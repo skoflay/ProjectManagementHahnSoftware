@@ -1,4 +1,5 @@
-﻿using BackendProjectManagement.Models;
+﻿using BackendProjectManagement.DTOs;
+using BackendProjectManagement.Models;
 
 namespace BackendProjectManagement.Repositories
 {
@@ -9,7 +10,7 @@ namespace BackendProjectManagement.Repositories
         Task<bool> UpdateAsync(Project project);
         Task<bool> DeleteAsync(Guid id);
         Task<Project?> GetByIdAsync(Guid id);
-
+        Task<PagedResultDto<Project>> GetPagedAsync(int page, int pageSize);
     }
 
 }
