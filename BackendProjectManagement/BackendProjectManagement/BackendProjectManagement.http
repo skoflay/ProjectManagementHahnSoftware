@@ -1,4 +1,4 @@
-@BackendProjectManagement_HostAddress = http://localhost:5182
+@BackendProjectManagement_HostAddress = http://localhost:7033
 
 GET {{BackendProjectManagement_HostAddress}}/Projects/
 Accept: application/json

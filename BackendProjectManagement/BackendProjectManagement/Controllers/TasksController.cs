@@ -1,11 +1,13 @@
 ﻿using BackendProjectManagement.DTOs;
 using BackendProjectManagement.Mapper;
 using BackendProjectManagement.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackendProjectManagement.Controllers
 {
+    [Authorize]
     [Route("api/projects/{projectId:guid}/tasks")]
     [ApiController]
     public class TasksController : ControllerBase

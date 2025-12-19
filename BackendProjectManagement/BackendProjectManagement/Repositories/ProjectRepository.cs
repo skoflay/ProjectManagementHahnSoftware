@@ -5,10 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BackendProjectManagement.Repositories
 {
-    public class ProjectRepository :IProjectRepository
+    public class ProjectRepository : IProjectRepository
     {
-
-        private readonly AppDbContext _context; 
+        private readonly AppDbContext _context;
 
         public ProjectRepository(AppDbContext context)
         {
@@ -21,10 +20,15 @@ namespace BackendProjectManagement.Repositories
             await _context.SaveChangesAsync();
             return project;
         }
-        public async Task<List<Project>> GetAllAsync()
+
+        public async Task<List<Project>> GetAllAsync(Guid userId)
         {
-            return await _context.Projects.ToListAsync();
+            return await _context.Projects
+                .Where(p => p.UserId == userId)
+                .OrderByDescending(p => p.CreatedAt)
+                .ToListAsync();
         }
+
         public async Task<bool> UpdateAsync(Project project)
         {
             _context.Projects.Update(project);
@@ -32,9 +36,11 @@ namespace BackendProjectManagement.Repositories
             return true;
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(Guid id, Guid userId)
         {
-            var project = await _context.Projects.FindAsync(id);
+            var project = await _context.Projects
+                .FirstOrDefaultAsync(p => p.Id == id && p.UserId == userId);
+
             if (project == null)
                 return false;
 
@@ -43,19 +49,21 @@ namespace BackendProjectManagement.Repositories
             return true;
         }
 
-        public async Task<Project?> GetByIdAsync(Guid id)
+        public async Task<Project?> GetByIdAsync(Guid id, Guid userId)
         {
-            return await _context.Projects.FindAsync(id);
+            return await _context.Projects
+                .FirstOrDefaultAsync(p => p.Id == id && p.UserId == userId);
         }
 
-        public async Task<PagedResultDto<Project>> GetPagedAsync(int page, int pageSize)
+        public async Task<PagedResultDto<Project>> GetPagedAsync(Guid userId, int page, int pageSize)
         {
-            var query = _context.Projects.AsQueryable();
+            var query = _context.Projects
+                .Where(p => p.UserId == userId);
 
             var totalItems = await query.CountAsync();
 
             var items = await query
-                .OrderByDescending(p => p.CreatedAt) 
+                .OrderByDescending(p => p.CreatedAt)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -68,8 +76,5 @@ namespace BackendProjectManagement.Repositories
                 TotalItems = totalItems
             };
         }
-
-
-
     }
 }
