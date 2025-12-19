@@ -6,7 +6,6 @@ namespace BackendProjectManagement.Services
 {
     public class ProjectService : IProjectService
     {
-
         private readonly IProjectRepository _repository;
         private readonly ITaskRepository _taskRepository;
 
@@ -20,28 +19,28 @@ namespace BackendProjectManagement.Services
         {
             project.Id = Guid.NewGuid();
             project.CreatedAt = DateTime.UtcNow;
-
+           
             return await _repository.AddAsync(project);
         }
 
-        public async Task<List<Project>> GetAllAsync()
+        public async Task<List<Project>> GetAllAsync(Guid userId)
         {
-            return await _repository.GetAllAsync();
+            return await _repository.GetAllAsync(userId);
         }
 
-        public async Task<bool> UpdateAsync(Project project)
+        public async Task<bool> UpdateAsync(Project project, Guid userId)
         {
             return await _repository.UpdateAsync(project);
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(Guid id, Guid userId)
         {
-            return await _repository.DeleteAsync(id);
+            return await _repository.DeleteAsync(id, userId);
         }
 
-        public async Task<Project?> GetByIdAsync(Guid id)
+        public async Task<Project?> GetByIdAsync(Guid id, Guid userId)
         {
-            return await _repository.GetByIdAsync(id);
+            return await _repository.GetByIdAsync(id, userId);
         }
 
         public async Task<ProjectProgressDto> GetProgressAsync(Guid projectId)
@@ -58,15 +57,11 @@ namespace BackendProjectManagement.Services
                 ProgressPercentage = total == 0 ? 0 : (completed * 100) / total,
                 IsCompleted = total > 0 && completed == total
             };
-
         }
 
-        public async Task<PagedResultDto<Project>> GetPagedAsync(int page, int pageSize)
+        public async Task<PagedResultDto<Project>> GetPagedAsync(Guid userId, int page, int pageSize)
         {
-            return await _repository.GetPagedAsync(page, pageSize);
+            return await _repository.GetPagedAsync(userId, page, pageSize);
         }
-
-
-
     }
 }

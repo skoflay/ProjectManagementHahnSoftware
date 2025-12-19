@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { ProjectForm } from '../components/ProjectForm';
 import { ProjectUpdateForm } from '../components/ProjectUpdateForm';
 import { ProjectProgressBar } from '../components/ProjectProgressBar';
+import '../styles/projects.css'; // CSS pour cards fixes
 
 export const ProjectsPage = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -78,8 +79,8 @@ export const ProjectsPage = () => {
       <div className="row">
         {projects.map(project => (
           <div className="col-md-4 mb-3" key={project.id}>
-            <div className="card shadow-sm">
-              <div className="card-body">
+            <div className="card shadow-sm project-card">
+              <div className="card-body d-flex flex-column">
                 {editingProjectId === project.id ? (
                   <ProjectUpdateForm
                     project={project}
@@ -93,9 +94,11 @@ export const ProjectsPage = () => {
 
                     <ProjectProgressBar projectId={project.id} />
 
-                    <button className="btn btn-sm btn-primary me-2" onClick={() => setEditingProjectId(project.id)}>✏️</button>
-                    <button className="btn btn-sm btn-danger me-2" onClick={() => handleDelete(project.id)}>🗑️</button>
-                    <button className="btn btn-sm btn-info" onClick={() => handleDetails(project.id)}>📄</button>
+                    <div className="mt-auto">
+                      <button className="btn btn-sm btn-primary me-2" onClick={() => setEditingProjectId(project.id)}>✏️</button>
+                      <button className="btn btn-sm btn-danger me-2" onClick={() => handleDelete(project.id)}>🗑️</button>
+                      <button className="btn btn-sm btn-info" onClick={() => handleDetails(project.id)}>📄</button>
+                    </div>
                   </>
                 )}
               </div>
