@@ -1,6 +1,7 @@
 ﻿using BackendProjectManagement.DTOs;
 using BackendProjectManagement.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 [ApiController]
 [Route("api/auth")]
@@ -23,7 +24,22 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto dto)
     {
+      
         var token = await _authService.LoginAsync(dto);
-        return Ok(new { token });
+
+       
+        var user = await _authService.GetByEmailAsync(dto.Email);
+        if (user == null) return NotFound();
+
+        
+        return Ok(new
+        {
+            token,
+            email = user.Email
+        });
     }
+
+
+    
+
 }

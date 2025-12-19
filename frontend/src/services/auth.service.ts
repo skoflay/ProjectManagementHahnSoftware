@@ -12,14 +12,22 @@ export const AuthService = {
 
     const data = await res.json();
     localStorage.setItem(TOKEN_KEY, data.token);
-    return data;
+    return data; 
   },
 
   logout: () => {
     localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem('user');
+  },
+
+  getCurrentUser: async (token: string) => {
+    const res = await fetch('/api/auth/me', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) throw new Error('Failed to get user info');
+    return res.json(); 
   },
 
   getToken: () => localStorage.getItem(TOKEN_KEY),
-
   isAuthenticated: () => !!localStorage.getItem(TOKEN_KEY),
 };
