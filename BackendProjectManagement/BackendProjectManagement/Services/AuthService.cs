@@ -56,10 +56,13 @@ public class AuthService : IAuthService
 
         return user;
     }
-    public async Task<User?> GetByEmailAsync(string email)
+    public async Task<User> GetByEmailAsync(string email)
     {
-        return await _authRepository.GetByEmailAsync(email);
+        var user = await _authRepository.GetByEmailAsync(email);
+        if (user == null) throw new Exception("User not found");
+        return user;
     }
+
 
 
 
