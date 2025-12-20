@@ -1,26 +1,33 @@
 .task-card {
-  border-radius: 12px;
-  background: #fff;
-  border: none;
-  transition: transform 0.2s, box-shadow 0.3s;
-  padding: 1rem;
+  transition: all 0.3s ease;
 }
 
-.task-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-}
 
 .task-card.completed {
-  opacity: 1; 
+  background-color: #f1fdf4;
+  border-left: 6px solid #28a745;
+  opacity: 0.85;
 }
 
 
-.task-card.completed .card-title {
+.task-card.completed h5 {
   text-decoration: line-through;
-  color: #999;
-  background-color: greenyellow;
+  color: #6c757d;
 }
+
+
+.task-card.completed p {
+  color: #868e96;
+}
+
+
+.task-card.completed svg {
+  color: #28a745;
+}
+
+
+
+
 
 .card-title {
   font-weight: 600;
@@ -41,4 +48,7 @@
 
 .btn:hover {
   transform: translateY(-2px);
+}
+.task-card:not(.completed) {
+  background-color: #ffffff;
 }

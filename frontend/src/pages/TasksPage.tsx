@@ -34,7 +34,7 @@ export const TasksPage = () => {
 
   const totalPages = Math.ceil(totalItems / pageSize);
 
-  /* ================= LOAD PROJECT ================= */
+
   const loadProject = async () => {
     if (!projectId) return;
     try {
@@ -45,7 +45,7 @@ export const TasksPage = () => {
     }
   };
 
-  /* ================= LOAD TASKS ================= */
+  
   const loadTasks = async (pageNumber: number = page) => {
     if (!projectId) return;
 
@@ -61,7 +61,7 @@ export const TasksPage = () => {
 
       let items = data.items || [];
 
-      // Frontend filter (no backend change)
+      
       if (filter === 'completed') {
         items = items.filter(t => t.isCompleted);
       }
@@ -80,12 +80,12 @@ export const TasksPage = () => {
     }
   };
 
-  /* ================= EFFECTS ================= */
+ 
   useEffect(() => { loadProject(); }, [projectId]);
   useEffect(() => { loadTasks(page); }, [page, projectId]);
   useEffect(() => { loadTasks(1); }, [search, filter]);
 
-  /* ================= ACTIONS ================= */
+ 
   const handleDelete = async (taskId: string) => {
     if (!confirm('Are you sure?')) return;
     await TaskService.delete(projectId!, taskId);
@@ -108,7 +108,7 @@ export const TasksPage = () => {
     loadTasks(page);
   };
 
-  /* ================= UI ================= */
+
   return (
     <div className="container mt-4">
       <h2 className="mb-3">
