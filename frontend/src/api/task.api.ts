@@ -36,7 +36,8 @@ getPaged: async (
   projectId: string,
   page: number,
   pageSize: number,
-  search?: string
+  search?: string,
+  isCompleted?: boolean
 ): Promise<PagedResult<Task>> => {
   const res = await apiClient.get<PagedResult<Task>>(
     `/projects/${projectId}/tasks/paged`,
@@ -44,12 +45,14 @@ getPaged: async (
       params: {
         page,
         pageSize,
-        ...(search && { search })
+        ...(search && { search }),
+        ...(isCompleted !== undefined && { isCompleted })
       }
     }
   );
   return res.data;
 }
+
 
 
 };

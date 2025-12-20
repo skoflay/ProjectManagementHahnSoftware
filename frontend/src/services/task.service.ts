@@ -24,8 +24,14 @@ export const TaskService = {
      TaskApi.update(projectId, taskId, data),
 
 
-    getPaged: (projectId: string, page: number, pageSize: number, search?: string) => {
-    return TaskApi.getPaged(projectId, page, pageSize, search);
-  },
+    getPaged: (
+  projectId: string,
+  page: number,
+  pageSize: number,
+  search?: string,
+  isCompleted?: boolean
+) => {
+  return TaskApi.getPaged(projectId, page, pageSize, search, isCompleted);
+},
 
 };
