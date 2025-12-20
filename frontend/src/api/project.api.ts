@@ -31,13 +31,28 @@ export const ProjectApi = {
     return res.data;
   },
 
-   getPaged: async (
-    page: number,
-    pageSize: number
-  ): Promise<PagedResult<Project>> => {
-    const res = await apiClient.get<PagedResult<Project>>(
-      `/projects?page=${page}&pageSize=${pageSize}`
-    );
+  getPaged: async (
+  page: number,
+  pageSize: number,
+  search?: string
+): Promise<PagedResult<Project>> => {
+  const res = await apiClient.get<PagedResult<Project>>(
+    `/projects`,
+    {
+      params: {
+        page,
+        pageSize,
+        search
+      }
+    }
+  );
+  return res.data;
+},
+ getById: async (projectId: string): Promise<Project> => {
+    const res = await apiClient.get<Project>(`/projects/${projectId}`);
     return res.data;
-  }
+  },
+
+
+
 };

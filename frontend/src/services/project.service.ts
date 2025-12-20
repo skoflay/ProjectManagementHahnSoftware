@@ -21,11 +21,19 @@ export const ProjectService = {
     return ProjectApi.getProgress(projectId);
   },
   
-  getPaged: async (
-    page: number,
-    pageSize: number
-  ): Promise<PagedResult<Project>> => {
-    return ProjectApi.getPaged(page, pageSize);
-  }
+   getPaged: async (
+  page: number,
+  pageSize: number,
+  search?: string
+): Promise<PagedResult<Project>> => {
+  return ProjectApi.getPaged(page, pageSize, search);
+},
+
+getById: async (projectId: string): Promise<Project> => {
+  return await ProjectApi.getById(projectId); 
+},
+
+
+
 
 };

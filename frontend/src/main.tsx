@@ -4,11 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
 import App from './App'
 import { AuthProvider } from './context/AuthContext'
-
+import { ThemeProvider } from "./context/ThemeProvider";
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <ThemeProvider>
     <AuthProvider>
       <App />
     </AuthProvider>
+    </ThemeProvider>
   </StrictMode>
 )

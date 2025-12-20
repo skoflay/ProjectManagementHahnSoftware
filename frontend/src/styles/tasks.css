@@ -1,0 +1,44 @@
+.task-card {
+  border-radius: 12px;
+  background: #fff;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.3s;
+  padding: 1rem;
+}
+
+.task-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.task-card.completed {
+  opacity: 1; 
+}
+
+
+.task-card.completed .card-title {
+  text-decoration: line-through;
+  color: #999;
+  background-color: greenyellow;
+}
+
+.card-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.card-text {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.btn {
+  border-radius: 8px;
+  padding: 0.4rem 0.7rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}

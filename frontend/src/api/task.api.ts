@@ -1,5 +1,6 @@
 import { apiClient } from './axios';
 import type { Task } from '../types/task.types';
+import type { PagedResult } from '../types/PagedResult';
 
 export const TaskApi = {
   getByProject: async (projectId: string): Promise<Task[]> => {
@@ -29,5 +30,26 @@ export const TaskApi = {
   update: async (projectId: string, taskId: string, payload: { title: string; description?: string }): Promise<Task> => {
     const response = await apiClient.patch<Task>(`/projects/${projectId}/tasks/${taskId}`, payload);
     return response.data;
-  }
+  },
+
+getPaged: async (
+  projectId: string,
+  page: number,
+  pageSize: number,
+  search?: string
+): Promise<PagedResult<Task>> => {
+  const res = await apiClient.get<PagedResult<Task>>(
+    `/projects/${projectId}/tasks/paged`,
+    {
+      params: {
+        page,
+        pageSize,
+        ...(search && { search })
+      }
+    }
+  );
+  return res.data;
+}
+
+
 };

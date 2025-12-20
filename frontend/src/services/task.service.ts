@@ -1,6 +1,7 @@
 import type { Task } from '../types/task.types';
 import { TaskApi } from '../api/task.api';
 
+
 export const TaskService = {
   getByProject: async (projectId: string): Promise<Task[]> => 
     TaskApi.getByProject(projectId),
@@ -20,5 +21,11 @@ export const TaskService = {
     TaskApi.delete(projectId, taskId),
 
   update: async (projectId: string, taskId: string, data: { title: string; description?: string }): Promise<Task> =>
-     TaskApi.update(projectId, taskId, data)
+     TaskApi.update(projectId, taskId, data),
+
+
+    getPaged: (projectId: string, page: number, pageSize: number, search?: string) => {
+    return TaskApi.getPaged(projectId, page, pageSize, search);
+  },
+
 };

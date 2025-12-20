@@ -2,6 +2,7 @@ import { useAuth } from '../context/AuthContext';
 import { AuthService } from '../services/auth.service';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import '../styles/login.css';
 
 export const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -11,62 +12,51 @@ export const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setError('');
+    e.preventDefault();
+    setError('');
 
-  try {
-    
-    const { token, email: userEmail } = await AuthService.login(email, password);
+    try {
+      const { token, email: userEmail } = await AuthService.login(email, password);
+      localStorage.setItem('token', token);
 
-    
-    localStorage.setItem('token', token);
-
-    
-    login({
-      email: userEmail,
-      name: userEmail.split('@')[0],
-    });
-
-    navigate('/projects');
-  } catch (err) {
-    setError('Invalid email or password');
-    console.error(err);
-  }
-};
-
+      login({ email: userEmail, name: userEmail.split('@')[0] });
+      navigate('/projects');
+    } catch (err) {
+      setError('Invalid email or password');
+      console.error(err);
+    }
+  };
 
   return (
-    <div className="container mt-5" style={{ maxWidth: 400 }}>
-      <h2 className="mb-4">Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label>Email</label>
-          <input aria-label='g'
+    <div className="login-container">
+      <div className="login-card">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <input
             type="email"
             className="form-control"
+            placeholder="Email"
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
           />
-        </div>
 
-        <div className="mb-3">
-          <label>Password</label>
-          <input aria-label='g'
+          <input
             type="password"
             className="form-control"
+            placeholder="Password"
             value={password}
             onChange={e => setPassword(e.target.value)}
             required
           />
-        </div>
 
-        {error && <div className="text-danger mb-2">{error}</div>}
+          {error && <div className="text-danger">{error}</div>}
 
-        <button className="btn btn-primary w-100" type="submit">
-          Login
-        </button>
-      </form>
+          <button type="submit" className="btn btn-primary w-100 btn-login">
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
