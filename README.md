@@ -232,4 +232,8 @@ Architecture choices were made with clarity and learning in mind
 
 The project is easy to extend and easy to reason about
 
+<<<<<<< HEAD
 Security aspects were relaxed intentionally for development simplicity
+=======
+Security aspects were relaxed intentionally for development simplicity
+>>>>>>> origin/main
