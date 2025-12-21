@@ -16,6 +16,7 @@ namespace BackendProjectManagement.Application.Mapper
                 CreatedAt = DateTime.UtcNow
             };
         }
+
         public static ProjectDto ToDto(Project project)
         {
             return new ProjectDto
