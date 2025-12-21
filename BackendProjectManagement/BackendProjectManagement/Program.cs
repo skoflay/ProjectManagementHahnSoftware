@@ -1,7 +1,10 @@
-using BackendProjectManagement.Configurations;
-using BackendProjectManagement.Data;
-using BackendProjectManagement.Repositories;
-using BackendProjectManagement.Services;
+using BackendProjectManagement.Application.ServiceInterfaces;
+using BackendProjectManagement.Application.Services;
+using BackendProjectManagement.Infrastructure.Configurations;
+using BackendProjectManagement.Domain.Entities.Interfaces.RepositoryInterfaces;
+using BackendProjectManagement.Infrastructure.Data;
+using BackendProjectManagement.Infrastructure.Persistence.Repositories;
+using BackendProjectManagement.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -34,7 +37,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("FrontendPolicy", policy =>
     {
-        policy.WithOrigins("http://localhost:5173") 
+        policy.WithOrigins("http://localhost:3000") 
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -77,7 +80,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 
 var app = builder.Build();
-app.Urls.Add("http://localhost:7033");
+
 
 // Middleware 
 

@@ -1,7 +1,7 @@
-﻿using BackendProjectManagement.DTOs;
-using BackendProjectManagement.Models;
-using BackendProjectManagement.Repositories;
-using BackendProjectManagement.Services;
+﻿using BackendProjectManagement.Application.Services;
+using BackendProjectManagement.Domain.Entities.Interfaces.RepositoryInterfaces;
+using BackendProjectManagement.Domain.Entities.Models;
+using BackendProjectManagement.DTOs;
 using Moq;
 using System;
 using System.Collections.Generic;

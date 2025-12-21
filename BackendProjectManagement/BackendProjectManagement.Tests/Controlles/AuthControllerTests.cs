@@ -1,6 +1,6 @@
-﻿using BackendProjectManagement.DTOs;
-using BackendProjectManagement.Models;
-using BackendProjectManagement.Services;
+﻿using BackendProjectManagement.Application.ServiceInterfaces;
+using BackendProjectManagement.Domain.Entities.Models;
+using BackendProjectManagement.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;

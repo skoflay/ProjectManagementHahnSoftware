@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Filter\" />
+    <Folder Include="API\Filter\" />
   </ItemGroup>
 
 </Project>

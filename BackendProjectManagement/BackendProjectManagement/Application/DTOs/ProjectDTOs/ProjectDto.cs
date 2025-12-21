@@ -1,0 +1,14 @@
+﻿namespace BackendProjectManagement.Application.DTOs.ProjectDTOs
+{
+    public class ProjectDto
+    {
+        public Guid Id { get; set; } 
+        public string Title { get; set; }
+        public string? Description { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+    
+    }
+
+}

@@ -1,7 +1,9 @@
-﻿using BackendProjectManagement.Controllers;
+﻿using BackendProjectManagement.API.Controllers;
+using BackendProjectManagement.Application.DTOs.TaskDTOs;
+using BackendProjectManagement.Application.ServiceInterfaces;
+using BackendProjectManagement.Domain.Entities.Models;
 using BackendProjectManagement.DTOs;
-using BackendProjectManagement.Models;
-using BackendProjectManagement.Services;
+using BackendProjectManagement.DTOs.TaskDTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;

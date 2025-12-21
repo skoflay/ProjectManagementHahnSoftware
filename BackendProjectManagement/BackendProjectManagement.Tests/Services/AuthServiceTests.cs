@@ -1,8 +1,9 @@
 ﻿using BackendProjectManagement;
+using BackendProjectManagement.Application.DTOs.AuthDTOs;
+using BackendProjectManagement.Application.ServiceInterfaces;
+using BackendProjectManagement.Domain.Entities.Interfaces.RepositoryInterfaces;
+using BackendProjectManagement.Domain.Entities.Models;
 using BackendProjectManagement.DTOs;
-using BackendProjectManagement.Models;
-using BackendProjectManagement.Repositories;
-using BackendProjectManagement.Services;
 using Moq;
 using System;
 using System.Threading.Tasks;
