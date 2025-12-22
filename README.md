@@ -1,4 +1,4 @@
-                           *Hahn Software Morocco - End of studies internship 2026*
+     *Hahn Software Morocco - End of studies internship 2026*
 
 📌 Project Management System
 
@@ -16,7 +16,7 @@ Modern DevOps: A fully containerized workflow for seamless environment setup.
 
 The system is built as a realistic backend-frontend ecosystem where scalability and code organization are treated as core requirements from day one.
 
-                                                *🛠️ Tech Stack*
+    *🛠️ Tech Stack*
 
 Backend
 
@@ -178,6 +178,6 @@ To run tests locally:
 
 The testing strategy prioritizes code reliability and critical paths over 100% vanity coverage.
 
-                                       *📝 Final Thoughts*
+    *📝 Final Thoughts*
 
 *Every architectural choice was made to prioritize clarity and extensibility. This system is built to be easily understood by developers while providing the robustness required for enterprise evolution.*
