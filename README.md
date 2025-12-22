@@ -62,7 +62,7 @@ Clone the repository.
 
 From the root directory, run:
 
-docker compose up --build
+*docker compose up --build*
 
 
 Access the application:
@@ -77,16 +77,16 @@ If you prefer running the services outside of Docker:
 
 Backend:
 
-cd BackendProjectManagement
+*cd BackendProjectManagement
 dotnet restore
-dotnet run
+dotnet run*
 
 
 Frontend:
 
-cd frontend
+*cd frontend
 npm install
-npm start
+npm start*
 
 
 🗄️ Database Configuration
@@ -101,9 +101,7 @@ Username: root
 
 Password: souhil
 
-[!WARNING]
-
-Database credentials are hardcoded for development and testing convenience only. For production environments, use Environment Variables or Secrets Management.
+I konw that Database credentials are hardcoded for development and testing convenience only. For production environments, use Environment Variables or Secrets Management.
 
 🧱 Architecture & Design
 
@@ -113,8 +111,11 @@ This project implements Clean Architecture inspired by Domain-Driven Design (DDD
 
 BackendProjectManagement/
 ├── API/             # Controllers, Middlewares, Program.cs
+
 ├── Application/     # Business Logic, DTOs, Interfaces, Services
+
 ├── Domain/          # Core Business Entities (No Dependencies)
+
 └── Infrastructure/  # EF Core, Repositories, JWT Implementation
 
 
@@ -140,33 +141,20 @@ High-level modules depend on abstractions, not concrete implementations.
 
 📌 DDD Implementation Status
 
-Concept
 
-Status
+**Concept        Status
 
-Entities
+Entities       ✅ Implemented
 
-✅ Implemented
+Repositories   ✅ Implemented
 
-Repositories
+Services       ✅ Implemented
 
-✅ Implemented
+Domain Events  ❌ Planned
 
-Services
+Value Objects  ❌ Planned
 
-✅ Implemented
-
-Domain Events
-
-❌ Planned
-
-Value Objects
-
-❌ Planned
-
-Aggregates
-
-❌ Planned
+Aggregates     ❌ Planned**
 
 🧪 Quality Assurance
 
@@ -180,11 +168,11 @@ Data Transformation
 
 To run tests locally:
 
-dotnet test
+*dotnet test*
 
 
-Note: The testing strategy prioritizes code reliability and critical paths over 100% vanity coverage.
+The testing strategy prioritizes code reliability and critical paths over 100% vanity coverage.
 
 📝 Final Thoughts
 
-Every architectural choice was made to prioritize clarity and extensibility. This system is built to be easily understood by new developers while providing the robustness required for enterprise evolution.
+*Every architectural choice was made to prioritize clarity and extensibility. This system is built to be easily understood by developers while providing the robustness required for enterprise evolution.*
