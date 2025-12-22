@@ -16,7 +16,7 @@ Modern DevOps: A fully containerized workflow for seamless environment setup.
 
 The system is built as a realistic backend-frontend ecosystem where scalability and code organization are treated as core requirements from day one.
 
-                                          *🛠️ Tech Stack*
+                                                *🛠️ Tech Stack*
 
 Backend
 
