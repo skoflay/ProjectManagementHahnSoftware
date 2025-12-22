@@ -1,239 +1,186 @@
-📌 Project Management System 
+📌 Project Management System
 
 📘 Project Overview
 
-This project is a high-performance, containerized Task Management application built to demonstrate enterprise-grade software development practices.
+This is a high-performance, containerized Task Management application designed to demonstrate enterprise-grade software development practices.
 
-The goal of this project goes beyond implementing basic CRUD features. It focuses on:
+Beyond basic CRUD functionality, this project serves as a showcase for:
 
-applying Clean Architecture to enforce a clear separation of concerns,
+Clean Architecture: Enforcing a strict separation of concerns.
 
-respecting SOLID principles to ensure maintainability and testability,
+SOLID Principles: Ensuring long-term maintainability and testability.
 
-and adopting a modern DevOps workflow through containerization and automated environment setup.
+Modern DevOps: A fully containerized workflow for seamless environment setup.
 
-The application is designed as a realistic backend–frontend system, where scalability, code organization, and long-term evolution are considered from the beginning rather than treated as afterthoughts.
+The system is built as a realistic backend-frontend ecosystem where scalability and code organization are treated as core requirements from day one.
 
-This project reflects how a professional production-ready system would be structured, while still remaining pragmatic and suitable for a development and testing environment.
+🛠️ Tech Stack
 
-
-🛠️ Tools Used
 Backend
 
-.NET (ASP.NET Core Web API)
+Framework: .NET (ASP.NET Core Web API)
 
-Entity Framework Core
+ORM: Entity Framework Core
 
-JWT Authentication
+Auth: JWT Authentication
 
-xUnit (unit testing)
+Testing: xUnit
 
-Docker
+Containerization: Docker
 
 Frontend
 
-React
+Framework: React with TypeScript
 
-TypeScript
+Routing: React Router
 
-React Router
+API Client: Axios
 
-Axios
+Containerization: Docker
 
-Docker
+Infrastructure
 
-Database
+Database: MySQL 8.0
 
-MySQL 8.0
+Orchestration: Docker Compose
 
-🚀 How to Run the Project
+🚀 Getting Started
 
-The project is fully Dockerized, so backend, frontend, and database can be started together.
+The project is fully Dockerized, allowing you to spin up the entire stack (Backend, Frontend, and Database) with a single command.
 
 🔹 Prerequisites
 
-You only need:
-
-Docker
+Docker Desktop
 
 Docker Compose
 
-(Optional for local dev: .NET SDK & Node.js)
+▶️ Run with Docker (Recommended)
 
-▶️ How to Run Backend
-Using Docker (recommended)
+Clone the repository.
 
-From the root folder:
+From the root directory, run:
 
 docker compose up --build
 
 
-Backend API will be available at:
+Access the application:
 
-http://localhost:7033
+Frontend: http://localhost:3000
 
-Running Backend Locally (optional)
+Backend API: http://localhost:7033
+
+▶️ Local Development (Optional)
+
+If you prefer running the services outside of Docker:
+
+Backend:
+
 cd BackendProjectManagement
 dotnet restore
 dotnet run
 
-▶️ How to Run Frontend
-Using Docker
 
-Frontend starts automatically with Docker Compose:
+Frontend:
 
-http://localhost:3000
-
-Running Frontend Locally (optional)
 cd frontend
 npm install
 npm start
 
-🗄️ Database Setup
 
-MySQL runs inside a Docker container
+🗄️ Database Configuration
 
-Database and schema are created automatically
+MySQL runs inside a dedicated Docker container. The schema is automatically migrated and seeded on startup.
 
-Default configuration (development only):
+Default Credentials (Dev Environment):
 
 Database: projecttasksdb
+
 Username: root
+
 Password: souhil
 
+[!WARNING]
 
-⚠️ Important note
-I’m aware that committing database credentials is not secure.
-This was done intentionally for development and testing purposes only, not for production.
+Database credentials are hardcoded for development and testing convenience only. For production environments, use Environment Variables or Secrets Management.
 
-🧪 Testing
+🧱 Architecture & Design
 
-I added unit tests using xUnit to validate core application logic.
+This project implements Clean Architecture inspired by Domain-Driven Design (DDD) to ensure the business logic remains independent of frameworks and UI.
 
-Tests are focused on:
+🗂️ Project Structure
+
+BackendProjectManagement/
+├── API/             # Controllers, Middlewares, Program.cs
+├── Application/     # Business Logic, DTOs, Interfaces, Services
+├── Domain/          # Core Business Entities (No Dependencies)
+└── Infrastructure/  # EF Core, Repositories, JWT Implementation
+
+
+🔄 Dependency Flow
+
+All dependencies flow inward:
+API → Application → Domain
+Infrastructure → Application → Domain
+
+🧠 Applied SOLID Principles
+
+S (Single Responsibility): Specific separation between Controllers, Services, and Repositories.
+
+O (Open/Closed): Logic is extensible through interface abstractions.
+
+L (Liskov Substitution): Seamless interchangeability between interfaces and implementations.
+
+I (Interface Segregation): Small, focused contracts to avoid "fat" interfaces.
+
+D (Dependency Inversion): High-level modules depend on abstractions, not concrete implementations.
+
+📌 DDD Implementation Status
+
+Concept
+
+Status
+
+Entities
+
+✅ Implemented
+
+Repositories
+
+✅ Implemented
 
 Services
 
-Business logic
+✅ Implemented
 
-Validation rules
+Domain Events
 
-Infrastructure and controllers are not over-tested to avoid unnecessary complexity
+❌ Planned
+
+Value Objects
+
+❌ Planned
+
+Aggregates
+
+❌ Planned
+
+🧪 Quality Assurance
+
+Unit tests are implemented using xUnit to validate core application logic, specifically focusing on:
+
+Business Logic Services
+
+Validation Rules
+
+Data Transformation
 
 To run tests locally:
 
 dotnet test
 
 
-The goal here was code reliability, not 100% coverage.
-
-🧱 Architecture & Design Choices
-
-This project follows Clean Architecture principles, inspired by Domain-Driven Design (DDD).
-
-I didn’t aim for a pure or theoretical DDD implementation.
-Instead, I focused on clear separation of concerns, readability, and maintainability.
-
-🗂️ Backend Structure
-BackendProjectManagement/
-├── Domain/
-│   └── Entities/
-│
-├── Application/
-│   ├── DTOs/
-│   ├── Interfaces/
-│   └── Services/
-│
-├── Infrastructure/
-│   ├── Persistence/
-│   │   ├── Data/
-│   │   └── Repositories/
-│   └── Services/
-│
-├── API/
-│   └── Controllers/
-
-🔹 Domain Layer
-
-Contains the core business entities
-
-No dependency on frameworks or infrastructure
-
-Represents the business rules only
-
-I initially planned to add Domain Events, but avoided heavy refactoring to keep the project stable.
-
-🔹 Application Layer
-
-Contains business logic
-
-Defines interfaces for repositories and services
-
-Uses DTOs to isolate domain models from external layers
-
-🔹 Infrastructure Layer
-
-Implements repository interfaces
-
-Handles database access using EF Core
-
-Manages JWT authentication and persistence concerns
-
-🔹 API Layer
-
-Exposes REST endpoints
-
-Handles HTTP requests and responses
-
-Delegates all logic to the Application layer
-
-🔄 Dependency Flow
-
-All dependencies flow inward, following Clean Architecture rules:
-
-API → Application → Domain
-Infrastructure → Application → Domain
-
-🧠 SOLID Principles
-
-Throughout the project, I tried to respect SOLID principles as much as possible:
-
-S — Single Responsibility
-Each class has a clear responsibility (controllers, services, repositories).
-
-O — Open/Closed
-Business logic is extensible through interfaces without modifying existing code.
-
-L — Liskov Substitution
-Interfaces and implementations are interchangeable without breaking behavior.
-
-I — Interface Segregation
-Interfaces are small and focused, avoiding “fat” contracts.
-
-D — Dependency Inversion
-High-level modules depend on abstractions, not concrete implementations.
-
-This made the code easier to test and maintain.
-
-📌 DDD Status (Honest Summary)
-Concept	Status
-Entities	✅ Implemented
-Repositories	✅ Implemented
-Services	✅ Implemented
-Domain Events	❌ Not implemented
-Value Objects	❌ Not implemented
-Aggregates	❌ Not implemented
-
-This is a DDD-inspired Clean Architecture, adapted to a realistic development context.
+Note: The testing strategy prioritizes code reliability and critical paths over 100% vanity coverage.
 
 📝 Final Thoughts
 
-Architecture choices were made with clarity and learning in mind
-
-The project is easy to extend and easy to reason about
-
-<<<<<<< HEAD
-Security aspects were relaxed intentionally for development simplicity
-=======
-Security aspects were relaxed intentionally for development simplicity
->>>>>>> origin/main
+Every architectural choice was made to prioritize clarity and extensibility. This system is built to be easily understood by new developers while providing the robustness required for enterprise evolution.
