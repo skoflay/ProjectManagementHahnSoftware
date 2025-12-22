@@ -26,7 +26,7 @@ ORM: Entity Framework Core
 
 Auth: JWT Authentication
 
-                                                  *Testing: xUnit*
+    *Testing: xUnit*
 
 Containerization: Docker
 
@@ -46,7 +46,7 @@ Database: MySQL 8.0
 
 Orchestration: Docker Compose
 
-                                                  *🚀 Getting Started*
+    *🚀 Getting Started*
 
 The project is fully Dockerized, allowing you to spin up the entire stack (Backend, Frontend, and Database) with a single command.
 
@@ -62,7 +62,7 @@ Clone the repository.
 
 From the root directory, run:
 
-                                            *docker compose up --build*
+    *docker compose up --build*
 
 
 Access the application:
@@ -71,25 +71,25 @@ Frontend: http://localhost:3000
 
 Backend API: http://localhost:7033
 
-                                       *▶️ Local Development (Optional)*
+    *▶️ Local Development (Optional)*
 
 If you prefer running the services outside of Docker:
 
 Backend:
 
-                                                  *cd BackendProjectManagement
-                                                  dotnet restore
-                                                  dotnet run*
+      *cd BackendProjectManagement
+      dotnet restore
+      dotnet run*
 
 
 Frontend:
 
-                                                      *cd frontend
-                                                      npm install
-                                                      npm run dev*
+      *cd frontend
+       npm install
+       npm run dev*
 
 
-                                         *🗄️ Database Configuration*
+    *🗄️ Database Configuration*
 
 MySQL runs inside a dedicated Docker container. The schema is automatically migrated and seeded on startup.
 
@@ -103,14 +103,14 @@ Password: souhil
 
 I konw that Database credentials are hardcoded for development and testing convenience only. For production environments, use Environment Variables or Secrets Management.
 
-                                   *🧱 Architecture & Design*
+    *🧱 Architecture & Design*
 
 This project implements Clean Architecture inspired by Domain-Driven Design (DDD) to ensure the business logic remains independent of frameworks and UI.
 
-                                *🗂️ Project Structure*
+     *🗂️ Project Structure*
 
-                            /*
-                            BackendProjectManagement/
+    
+     BackendProjectManagement/
                             
                             ├── API/             # Controllers, Middlewares, Program.cs
                             
@@ -119,15 +119,17 @@ This project implements Clean Architecture inspired by Domain-Driven Design (DDD
                             ├── Domain/          # Core Business Entities (No Dependencies)
                             
                             └── Infrastructure/  # EF Core, Repositories, JWT Implementation
-                            */
 
-                                              *🔄 Dependency Flow*
+
+                            
+
+    *🔄 Dependency Flow*
 
 All dependencies flow inward:
 API → Application → Domain
 Infrastructure → Application → Domain
 
-                                   *🧠 Applied SOLID Principles*
+    *🧠 Applied SOLID Principles*
 
 S (Single Responsibility): Specific separation between Controllers, Services, and Repositories.
 
@@ -142,7 +144,7 @@ D (Dependency Inversion):
 High-level modules depend on abstractions, not concrete implementations.
 
 
-                                *📌 DDD Implementation Status*
+    *📌 DDD Implementation Status*
 
 
 **Concept        Status
@@ -159,7 +161,7 @@ Value Objects  ❌ Planned
 
 Aggregates     ❌ Planned**
 
-                                           *🧪 Quality Assurance*
+    *🧪 Quality Assurance*
 
 Unit tests are implemented using xUnit to validate core application logic, specifically focusing on:
 
@@ -171,7 +173,7 @@ Data Transformation
 
 To run tests locally:
 
-                                         *dotnet test*
+    *dotnet test*
 
 
 The testing strategy prioritizes code reliability and critical paths over 100% vanity coverage.
