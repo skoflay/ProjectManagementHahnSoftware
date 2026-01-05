@@ -1,4 +1,5 @@
 ﻿using BackendProjectManagement.Application.DTOs.ProjectDTOs;
+using BackendProjectManagement.Application.DTOs.TaskDTOs;
 using BackendProjectManagement.Domain.Entities.Models;
 using BackendProjectManagement.DTOs.TaskDTOs.BackendProjectManagement.DTOs.TaskDTOs;
 
@@ -12,7 +13,6 @@ namespace BackendProjectManagement.Application.ServiceInterfaces
         Task<bool> DeleteAsync(Guid taskId);
         Task<TaskItem> UpdateAsync(Guid taskId, TaskItem updatedTask);
         Task<PagedResultDto<TaskItem>> GetPagedByProjectAsync(Guid projectId, TaskQueryDto dto);
-
     }
 
 }

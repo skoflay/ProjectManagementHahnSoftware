@@ -3,6 +3,7 @@ import { ProjectApi } from '../api/project.api';
 import type { Project } from '../types/project.types';
 import type {ProjectProgress} from '../types/projectprogress.types'
 import type { PagedResult } from '../types/PagedResult';
+
 export const ProjectService = {
   getAll: async (): Promise<Project[]> => {
     return ProjectApi.getAll();

@@ -35,6 +35,7 @@ namespace BackendProjectManagement.Application.Mapper
         {
             return tasks.Select(ToDto).ToList();
         }
+
         public static TaskItem ToEntity(UpdateTaskDto dto)
         {
             return new TaskItem

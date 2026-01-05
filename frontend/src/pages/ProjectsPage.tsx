@@ -6,6 +6,7 @@ import { ProjectForm } from '../components/ProjectForm';
 import { ProjectUpdateForm } from '../components/ProjectUpdateForm';
 import { ProjectProgressBar } from '../components/ProjectProgressBar';
 import { SearchInput } from '../components/SearchInput';
+
 import '../styles/projects.css';
 import { Edit2, Trash2, FileText, Plus } from 'lucide-react';
 
