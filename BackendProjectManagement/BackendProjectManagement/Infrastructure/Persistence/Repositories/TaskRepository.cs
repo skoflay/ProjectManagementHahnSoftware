@@ -60,7 +60,7 @@ namespace BackendProjectManagement.Infrastructure.Persistence.Repositories
             return await query
                 .OrderBy(t => t.IsCompleted)
                 .ToPagedResultAsync(dto.Page, dto.PageSize);
-        }
+        }     
 
 
     }

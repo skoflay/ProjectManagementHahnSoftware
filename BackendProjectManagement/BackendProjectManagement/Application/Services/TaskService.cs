@@ -1,4 +1,5 @@
 ﻿using BackendProjectManagement.Application.DTOs.ProjectDTOs;
+using BackendProjectManagement.Application.DTOs.TaskDTOs;
 using BackendProjectManagement.Application.ServiceInterfaces;
 using BackendProjectManagement.Domain.Entities.Interfaces.RepositoryInterfaces;
 using BackendProjectManagement.Domain.Entities.Models;
@@ -6,7 +7,7 @@ using BackendProjectManagement.DTOs.TaskDTOs.BackendProjectManagement.DTOs.TaskD
 
 namespace BackendProjectManagement.Application.Services
 {
-    public class TaskService :ITaskService
+    public class TaskService : ITaskService
     {
         private readonly ITaskRepository _taskRepository;
 
@@ -64,10 +65,6 @@ namespace BackendProjectManagement.Application.Services
         {
             return await _taskRepository.GetPagedByProjectAsync(projectId, dto);
         }
-
-
-
-
 
 
     }

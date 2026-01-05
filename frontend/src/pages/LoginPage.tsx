@@ -23,7 +23,7 @@ export const LoginPage = () => {
       navigate('/projects');
     } catch (err) {
       setError('Invalid email or password');
-      console.error(err);
+      console.log(err)
     }
   };
 
